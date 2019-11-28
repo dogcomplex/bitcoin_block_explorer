@@ -16,9 +16,11 @@ const requests = {
 
 const Blocks = {
   get: (hash) =>
-    requests.get(`/rawblock/${hash}?cors=true`),
+  	(hash === 'latest')
+	  	? Blocks.latest()
+	    : requests.get(`/rawblock/${hash}?cors=true`),
   latest: () =>
-    requests.get(`/block/latest`),
+    requests.get(`/latestblock?cors=true`).then(payload => Blocks.get(payload.hash)),
 };
 
 export default {

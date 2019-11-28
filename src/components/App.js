@@ -13,6 +13,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/blocks/:hash" component={({ match }) => <Block hash={match.params.hash} />} />
+      <Route path="/blocks/latest" component={() => <Block hash={'latest'} />} />
     </Switch>
   </div>
 );
