@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import logo from '../logo.svg';
@@ -13,10 +12,9 @@ const App = () => (
     <Header/>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/block/:hash" component={Block} />
+      <Route path="/blocks/:hash" component={({ match }) => <Block hash={match.params.hash} />} />
     </Switch>
   </div>
 );
 
-
-export default connect()(App);
+export default App;
