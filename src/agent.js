@@ -15,12 +15,21 @@ const requests = {
 };
 
 const Blocks = {
-  get: (hash) =>
-  	(hash === 'latest')
-	  	? Blocks.latest()
-	    : requests.get(`/rawblock/${hash}?cors=true`),
+  get: (hash) => {
+  	switch(hash) {
+  		case 'latest':
+  			return Blocks.latest();
+  		case 'genesis':
+  		case 'first':
+  			return Blocks.genesis();
+  		default:
+  			return requests.get(`/rawblock/${hash}?cors=true`);
+	  }
+  },
   latest: () =>
     requests.get(`/latestblock?cors=true`).then(payload => Blocks.get(payload.hash)),
+  genesis: () =>
+  	Blocks.get('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f'),
 };
 
 export default {
