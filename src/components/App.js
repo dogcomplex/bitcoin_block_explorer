@@ -12,8 +12,8 @@ const App = () => (
   <div className="App">
     <Header/>
     <Switch>
-      <Route exact path="/" component={() => 'HOME'} />
-      <Route path="/block/:hash" component={() => 'BLOCK'} />
+      <Route exact path="/" component={Home} />
+      <Route path="/block/:hash" component={Block} />
     </Switch>
   </div>
 );
