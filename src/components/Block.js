@@ -44,7 +44,7 @@ class Block extends React.Component {
     } else {
       const ONE_HOUR = 60 * 60 * 1000; // ms
       if ((Date.now() - ONE_HOUR) < time*1000 ) 
-        // re-fetch blocks that aren't an hour old yet, just in case there's a 51% attack
+        // re-fetch blocks that aren't an hour old yet, just in case the chain is being contested
         agent.Blocks.get(hash).then(payload => onLoad(payload, hash));
     }
   }
