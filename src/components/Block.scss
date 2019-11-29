@@ -23,11 +23,7 @@
     span {
       font-weight: 400;
       padding-left: 10px;
-      align-self: right;
       display: flex;
-      justify-content: space-between;
-      flex-direction: row;
-      width: 100%;
     }
 
   }
@@ -46,8 +42,48 @@
 
   }
 
+  .Transactions-section {
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    border: 0px;
+    border-bottom: 2px;
+    border-bottom-color: gray;
+    border-style: dotted;
+
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 10px;
+
+    .pagination {
+      padding: 10px;
+      padding-right: 30px;
+      font-size: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      a {
+        margin-top: -20px;
+        padding: 20px;
+        font-weight: 900;
+        cursor: pointer; 
+
+        &:hover {
+          color: #F0F0F0;
+        }
+      }
+    }
+  }
+
 }
 
 .Block-loading {
   // TODO center loader
+  position: relative;
+  left: -30px;
+  top: 30px;
 }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import './Block.scss';
 import agent from '../agent';
 import { BLOCK_LOADED } from '../constants/actionTypes';
+import Transaction from './Transaction';
 
 const mapStateToProps = ({ blocks }, { hash }) => {
   if (blocks && blocks[hash]) {
@@ -36,6 +37,16 @@ const timeFormat = t => (new Date(t)).toLocaleString();
 
 class Block extends React.Component {
   
+  state = {
+    tx_page: 0,
+    tx_limit: 10
+  };
+
+  constructor( props ) {
+    super( props );
+    this.changeTxPage = this.changeTxPage.bind(this);
+  }
+
   componentDidMount() {
     const { isLoaded, hash, onLoad, time } = this.props;
 
@@ -43,10 +54,18 @@ class Block extends React.Component {
       agent.Blocks.get(hash).then(payload => onLoad(payload, hash));
     } else {
       const ONE_HOUR = 60 * 60 * 1000; // ms
-      if ((Date.now() - ONE_HOUR) < time*1000 ) 
+      if ((Date.now() - ONE_HOUR) < time*1000 ) {
         // re-fetch blocks that aren't an hour old yet, just in case the chain is being contested
         agent.Blocks.get(hash).then(payload => onLoad(payload, hash));
+      }
     }
+  }
+
+  changeTxPage(diff) {
+    const { n_tx } = this.props;
+    const { tx_page, tx_limit } = this.state;
+    if (tx_page + diff >= 0 && (tx_page + diff)*tx_limit < n_tx )
+      this.setState(({ tx_page }) => ({ tx_page: tx_page + diff}));
   }
 
   render() {
@@ -69,11 +88,15 @@ class Block extends React.Component {
       ver, 
       weight 
     } = this.props;
+    const {
+      tx_page,
+      tx_limit
+    } = this.state;
 
     if (!isLoaded)
       return (
         <div className="Block-loading">
-          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
         </div>
       );
     return (
@@ -98,7 +121,7 @@ class Block extends React.Component {
         <div className="Block-line">Weight: <span>{numFormat(weight)} WU</span></div>
 
         <div className="Block-line">Fee: <span>{fee/100000000} BTC</span></div>
-        <div className="Block-line">Transaction Count: <span>{numFormat(n_tx)}</span></div>
+        
         
         <br/>
 
@@ -109,6 +132,19 @@ class Block extends React.Component {
         </div>
 
         <br/>
+
+        <div className="Transactions-section">
+          <div>Transactions:</div> 
+          <div className="pagination">
+            <a onClick={() => this.changeTxPage(-1)}>{' < '}</a>
+            { tx_page*tx_limit + 1 } to { Math.min((tx_page + 1) * tx_limit, n_tx) } of { n_tx }
+            <a onClick={() => this.changeTxPage(+1)}>{' > '}</a>
+          </div>
+        </div>
+
+        <div className="Transactions">
+          {tx.slice(tx_page*tx_limit, (tx_page + 1)*tx_limit).map(t => <Transaction {...t} key={t.hash} />)}
+        </div>
 
         <div className="borderline">Merkle Root: <span>{mrkl_root}</span></div>
       </div>
