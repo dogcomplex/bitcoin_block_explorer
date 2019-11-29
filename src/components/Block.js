@@ -107,21 +107,15 @@ class Block extends React.Component {
 
         <div className="Block-line">Height: <span>{height}</span></div>
         <div className="Block-line">Index: <span>{block_index}</span></div>
-
         <div className="Block-line">
           Version: <span>{ver} { !main_chain && <span> (Not Main Chain)</span> }</span>
         </div>
-
-        
         <div className="Block-line">Timestamp: <span>{timeFormat(time*1000)}</span></div>
-
         <div className="Block-line">Nonce: <span>{nonce}</span></div>
         <div className="Block-line">Size: <span>{numFormat(size)} bytes</span></div>
         <div className="Block-line">Bits: <span>{numFormat(bits)}</span></div>
         <div className="Block-line">Weight: <span>{numFormat(weight)} WU</span></div>
-
         <div className="Block-line">Fee: <span>{fee/100000000} BTC</span></div>
-        
         
         <br/>
 

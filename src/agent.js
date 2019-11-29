@@ -30,10 +30,8 @@ const Blocks = {
     requests.get(`/latestblock?cors=true`).then(payload => Blocks.get(payload.hash)),
   genesis: () =>
   	Blocks.get(GENESIS_BLOCK),
-  searchHeight: (search) => {
-    return requests.get(`/block-height/${search}?format=json&cors=true`)
+  searchHeight: (search) => requests.get(`/block-height/${search}?cors=true`)
       .then(payload => Blocks.get(payload.blocks[0].hash))
-  }
 };
 
 export default {

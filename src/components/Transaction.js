@@ -32,13 +32,9 @@ export default ({
     <div className="Tx-line">Weight: <span>{numFormat(weight)}</span></div>
     <div className="Tx-line">Size: <span>{numFormat(size)} bytes</span></div>
     <div className="Tx-line">Time: <span>{timeFormat(time*1000)}</span></div>
-
     <div className="Tx-line">Balance: <span>{balance/100000000} BTC</span></div>
     <div className="Tx-line">Fee: <span>{fee/100000000} BTC</span></div>
     <div className="Tx-line">Replace-By Fee: <span>{(rbf ? rbf : 0)/100000000} BTC</span></div>
-
-    
-    
     <div className="Tx-line">Inputs: <span>{numFormat(vin_sz)}</span></div>
     <div className="Tx-line">Outputs: <span>{numFormat(vout_sz)}</span></div>
   </div>

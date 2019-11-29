@@ -11,7 +11,8 @@ export default (state = {}, action) => {
           ...action.payload,
           isLoaded: true
         },
-        [action.request]: { // e.g. updating latest/genesis
+        [action.request]: { 
+          // used for setting the genesis or latest block
           ...action.payload,
           isLoaded: true
         }

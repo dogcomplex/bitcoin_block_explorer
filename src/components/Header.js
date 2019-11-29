@@ -6,7 +6,7 @@ import agent from '../agent';
 class Header extends React.Component {
 
   state = {
-    search: null
+    search: undefined
   }
 
   render() {
@@ -20,6 +20,7 @@ class Header extends React.Component {
         </div>
         <div>
           Search: 
+          {' '}
           <input type="text" placeholder=" Block Height" value={search} 
             onKeyDown={(e) => {
             	if (e.key === 'Enter') {
@@ -31,12 +32,12 @@ class Header extends React.Component {
                   search: ''
                 }))
                 .then(() => this.setState({ // to clear the value again for user entry
-                  search: null
+                  search: undefined
                 }))
                 .catch(() => {
                   this.props.history.push(`/not_found`);
                   this.setState({ search: '' });
-                  this.setState({ search: null });
+                  this.setState({ search: undefined });
                 })
               }
             }} 
