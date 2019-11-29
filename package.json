@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "cross-env": "^5.1.4"
+    "cross-env": "^5.1.4",
+    "lint": "^0.7.0"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
