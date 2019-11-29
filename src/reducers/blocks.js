@@ -5,7 +5,6 @@ import {
 export default (state = {}, action) => {
   switch (action.type) {
     case BLOCK_LOADED:
-      console.log('Block reloaded');
       return {
         ...state,
         [action.payload.hash]: {

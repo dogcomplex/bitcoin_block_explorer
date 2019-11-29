@@ -7,7 +7,6 @@ const API_ROOT = 'https://blockchain.info';
 const GENESIS_BLOCK = '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f'; 
 // local instance of https://github.com/Blockstream/esplora/blob/master/API.md
 
-const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
 const requests = {
@@ -31,6 +30,10 @@ const Blocks = {
     requests.get(`/latestblock?cors=true`).then(payload => Blocks.get(payload.hash)),
   genesis: () =>
   	Blocks.get(GENESIS_BLOCK),
+  searchHeight: (search) => {
+    return requests.get(`/block-height/${search}?format=json&cors=true`)
+      .then(payload => Blocks.get(payload.blocks[0].hash))
+  }
 };
 
 export default {
