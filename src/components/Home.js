@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BlockList from './BlockList';
 
 export default () => (
 	<div>
-		<span>HOME</span>
-		<Link to={`/blocks/genesis`}>Genesis Block</Link>
-		<Link to={`/blocks/latest`}>Latest Block</Link>
+		<p>Welcome to the Bitcoin Block Explorer</p>
+		<p>Click a Block to get started</p>
 	</div>
 );

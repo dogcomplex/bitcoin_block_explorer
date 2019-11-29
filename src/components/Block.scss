@@ -1,0 +1,53 @@
+.Block {
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  margin: 2em;
+  background-color: #F0F0F0;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+
+  .Block-line {
+    font-weight: 700;
+    border: 0px;
+    border-bottom: 1px;
+    border-bottom-color: gray;
+    border-style: dotted;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 10px;
+
+    span {
+      font-weight: 400;
+      padding-left: 10px;
+      align-self: right;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      width: 100%;
+    }
+
+  }
+
+  .borderline {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #808080;
+    color: #F0F0F0;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    word-wrap: break-word;
+
+  }
+
+}
+
+.Block-loading {
+  
+}
