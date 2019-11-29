@@ -19,27 +19,32 @@ const mapStateToProps = ({ blocks }, { hash }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (payload, hash) =>
-    dispatch({ type: BLOCK_LOADED, payload, hash })
+  onLoad: (payload, request) =>
+    dispatch({ type: BLOCK_LOADED, payload, request })
 });
 
 const validHash = (hash) => {
-  console.log(typeof hash, hash);
   if (typeof hash !== 'string') return false;
   if (hash.length !== 64) return false;
   return hash.split('0').join('') !== ''; // not an all-0 string
 };
 
-const numFormat = (n) => {
-  return n.toLocaleString();
-};
+const numFormat = n => n.toLocaleString();
+
+const timeFormat = t => (new Date(t)).toLocaleString();
 
 
 class Block extends React.Component {
   
   componentDidMount() {
-    const { isLoaded, hash, onLoad } = this.props;
+    const { isLoaded, hash, onLoad, time } = this.props;
+
     if (!isLoaded) {
+      agent.Blocks.get(hash).then(payload => onLoad(payload, hash));
+    } else {
+      const ONE_HOUR = 60 * 60 * 1000; // ms
+      if ((Date.now() - ONE_HOUR) < time*1000 ) 
+        // re-fetch blocks that aren't an hour old yet, just in case there's a 51% attack
         agent.Blocks.get(hash).then(payload => onLoad(payload, hash));
     }
   }
@@ -85,7 +90,7 @@ class Block extends React.Component {
         </div>
 
         
-        <div className="Block-line">Timestamp: <span>{time}</span></div>
+        <div className="Block-line">Timestamp: <span>{timeFormat(time*1000)}</span></div>
 
         <div className="Block-line">Nonce: <span>{nonce}</span></div>
         <div className="Block-line">Size: <span>{numFormat(size)} bytes</span></div>
