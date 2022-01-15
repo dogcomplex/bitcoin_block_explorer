@@ -32,7 +32,7 @@
     "history": "^4.6.3",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
-    "marked": "^0.3.6",
+    "marked": "^4.0.10",
     "node-sass": "^4.13.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
